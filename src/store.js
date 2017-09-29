@@ -53,7 +53,7 @@ export default function createObservableStore(initState = {}) {
     lock = false;
     if (changedCount > 0) {
       observers.forEach(f => {
-        f();
+        f(rootProxy);
       });
     }
   }
