@@ -222,4 +222,21 @@ describe('ObservableStore', () => {
       });
     });
   });
+  describe('#replace()', () => {
+    it('強制的にstateに反映する', () => {
+      const store = createObservableStore(testData());
+      const { state } = store;
+      store.replace(testData());
+      assertState(state, testData());
+    });
+    it('変更イベントを投げる', () => {
+      const changeHandler = sinon.spy();
+      const store = createObservableStore(testData());
+      const { state } = store;
+      store.observe(changeHandler);
+      store.replace(testData());
+      assertState(state, testData());
+      assert(changeHandler.calledOnce === true);
+    });
+  });
 });
