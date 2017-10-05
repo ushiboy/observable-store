@@ -12,6 +12,7 @@
     "clean": "rm -rf lib",
     "build": "babel src --out-dir lib && cp src/index.js.flow lib",
     "test": "mocha --require test/setup.js test/**/*-test.js",
+    "benchmark": "babel-node example/benchmark.js",
     "prepublish": "npm run clean && npm run build"
   },
   "author": "ushiboy",

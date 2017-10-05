@@ -5,6 +5,7 @@ import {
 
 export default function createObservableStore(initState = {}) {
   let lock = false;
+  let forceReplace = false;
   let changedCount = 0;
   const observers = new Set();
 
@@ -16,7 +17,7 @@ export default function createObservableStore(initState = {}) {
       }
 
       const oldValue = state[prop];
-      if (same(oldValue, value)) {
+      if (!forceReplace && same(oldValue, value)) {
         // 同じ場合は何もしない
         return true;
       }
@@ -58,6 +59,17 @@ export default function createObservableStore(initState = {}) {
     }
   }
 
+  function replace(source) {
+    forceReplace = true;
+    lock = true;
+    Object.assign(rootProxy, source);
+    forceReplace = false;
+    lock = false;
+    observers.forEach(f => {
+      f(rootProxy);
+    });
+  }
+
   function observe(o) {
     observers.add(o);
   }
@@ -71,6 +83,7 @@ export default function createObservableStore(initState = {}) {
       return rootProxy;
     },
     assign,
+    replace,
     observe,
     unobserve
   };
