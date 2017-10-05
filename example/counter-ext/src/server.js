@@ -2,7 +2,7 @@ import http from 'http';
 import url from 'url';
 import createObservableStore from 'observable-store';
 import React from 'react';
-import { renderToStaticMarkup } from 'react-dom/server';
+import { renderToNodeStream } from 'react-dom/server';
 import Html from './presentation/component/Html.js';
 import Application from './presentation/component/Application.js';
 import AppContext from './AppContext.js';
@@ -29,14 +29,12 @@ export function createServer() {
         const appContext = AppContext(store, counterRepository);
         res.statusCode = 200;
         res.setHeader('Content-Type', 'text/html');
-        res.write(`<!doctype html>${
-          renderToStaticMarkup(
-            <Html count={count}>
-              <Application appContext={appContext} store={store} />
-            </Html>
-          )
-        }`);
-        res.end();
+        res.write('<!doctype html>');
+        renderToNodeStream(
+          <Html count={count}>
+            <Application appContext={appContext} store={store} />
+          </Html>
+        ).pipe(res);
       });
     } else if (method === 'GET' && pathname === '/api/count') {
       counter.load().then(() => {
