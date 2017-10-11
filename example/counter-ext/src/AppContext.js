@@ -1,5 +1,5 @@
 /* @flow */
-import type Store from 'observable-store';
+import type Store from '@ushiboy/observable-store';
 import type { AppState, UseCase, Context } from './types.js';
 import type { CounterRepository } from './domain/Counter.js';
 

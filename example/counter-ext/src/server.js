@@ -1,6 +1,6 @@
 import http from 'http';
 import url from 'url';
-import createObservableStore from 'observable-store';
+import createObservableStore from '@ushiboy/observable-store';
 import React from 'react';
 import { renderToNodeStream } from 'react-dom/server';
 import Html from './presentation/component/Html.js';

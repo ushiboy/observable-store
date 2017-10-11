@@ -1,7 +1,7 @@
 {
-  "name": "observable-store",
+  "name": "@ushiboy/observable-store",
   "version": "0.1.0",
-  "description": "",
+  "description": "Observable Store Library",
   "main": "lib/index.js",
   "files": [
     "src",
@@ -13,7 +13,7 @@
     "build": "babel src --out-dir lib && cp src/index.js.flow lib",
     "test": "mocha --require test/setup.js test/**/*-test.js",
     "benchmark": "babel-node example/benchmark.js",
-    "prepublish": "npm run clean && npm run build"
+    "prepare": "npm run clean && npm run build"
   },
   "author": "ushiboy",
   "license": "MIT",

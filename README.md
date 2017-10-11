@@ -1,8 +1,8 @@
 # Observable Store
 
-(Draft)
+## Example
 
-## サンプル
+### Simple Example
 
 ```javascript
 const store = createObservableStore({
@@ -42,3 +42,62 @@ store.assign({
 });
 console.log(`count: ${state.count}`); // count: 2;
 ```
+
+### Example Application
+
+* [counter](./example/counter/): Simple counter application.
+* [counter-ext](./example/counter-ext): React counter Application (with Server Side Rendering).
+
+## API
+
+### `createObservableStore<T>(initialState: T): Store<T>`
+
+```javascript
+const store = createObservableStore({ users: [], organization: 'mycompany' });
+```
+
+### Instance properties
+
+#### `store.state: T`
+
+```javascript
+console.log(store.state.users[0]); // -> 'user1'
+
+store.state.users[0] = 'other'; // -> throw Error
+```
+
+### Instance methods
+
+#### `store.assign(...sources: any): void`
+
+```javascript
+store.assign({ users: ['user1', 'user2', 'user3'] }, { organization: 'newcompany' });
+```
+
+#### `store.replace(sources: any): void`
+
+```javascript
+store.replace({ users: ['user1', 'user2', 'user3'] });
+```
+
+#### `store.observe(o: (state: T) => void): void`
+
+```javascript
+const observer = state => {
+  console.log(store.state.users);
+};
+store.observe(observer);
+```
+
+#### `store.unobserve(o: (state: T) => void): void`
+
+```javascript
+const observer = state => {
+  console.log(store.state.users);
+};
+store.unobserve(observer);
+```
+
+## License
+
+MIT
