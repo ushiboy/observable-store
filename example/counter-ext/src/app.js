@@ -1,5 +1,5 @@
 /* @flow */
-import createObservableStore from 'observable-store';
+import createObservableStore from '@ushiboy/observable-store';
 import React from 'react';
 import { hydrate } from 'react-dom';
 import Application from './presentation/component/Application.js';

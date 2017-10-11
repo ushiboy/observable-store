@@ -1,5 +1,5 @@
 /* @flow */
-import type Store from 'observable-store';
+import type Store from '@ushiboy/observable-store';
 import type { AppStore, AppState } from '../../types.js';
 import React from 'react';
 import Counter from '../page/Counter.js';

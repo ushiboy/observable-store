@@ -1,5 +1,5 @@
 // @flow
-declare module 'observable-store' {
+declare module '@ushiboy/observable-store' {
   declare export type Store<T> = {
     state: T;
     assign(...sources: any): void;
