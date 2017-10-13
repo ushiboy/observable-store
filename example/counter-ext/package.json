@@ -24,7 +24,6 @@
   "dependencies": {
     "@ushiboy/observable-store": "file:../..",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "vue": "^2.4.4"
+    "react-dom": "^16.0.0"
   }
 }
