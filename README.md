@@ -1,10 +1,14 @@
 # Observable Store
 
+The observable-store notify when own state changed.
+
 ## Example
 
 ### Simple Example
 
 ```javascript
+import createObservableStore from '@ushiboy/observable-store';
+
 const store = createObservableStore({
   count: 0
 });
@@ -45,12 +49,14 @@ console.log(`count: ${state.count}`); // count: 2;
 
 ### Example Application
 
-* [counter](./example/counter/): Simple counter application.
-* [counter-ext](./example/counter-ext): React counter Application (with Server Side Rendering).
+* [counter](https://github.com/ushiboy/observable-store/tree/master/example/counter): Simple counter application.
+* [counter-ext](https://github.com/ushiboy/observable-store/tree/master/example/counter-ext): React counter application (with server side rendering).
 
 ## API
 
 ### `createObservableStore<T>(initialState: T): Store<T>`
+
+Creates an instance of observable store.
 
 ```javascript
 const store = createObservableStore({ users: [], organization: 'mycompany' });
@@ -60,15 +66,19 @@ const store = createObservableStore({ users: [], organization: 'mycompany' });
 
 #### `store.state: T`
 
-```javascript
-console.log(store.state.users[0]); // -> 'user1'
+Provides its own state.
 
-store.state.users[0] = 'other'; // -> throw Error
+```javascript
+console.log(store.state.organization); // -> 'mycompany'
+
+store.state.organization = 'other'; // -> throw Error
 ```
 
 ### Instance methods
 
 #### `store.assign(...sources: any): void`
+
+Updates its own state. Notify when the state changes.
 
 ```javascript
 store.assign({ users: ['user1', 'user2', 'user3'] }, { organization: 'newcompany' });
@@ -76,11 +86,15 @@ store.assign({ users: ['user1', 'user2', 'user3'] }, { organization: 'newcompany
 
 #### `store.replace(sources: any): void`
 
+Force updates its own state and notify.
+
 ```javascript
 store.replace({ users: ['user1', 'user2', 'user3'] });
 ```
 
 #### `store.observe(o: (state: T) => void): void`
+
+Register an observer.
 
 ```javascript
 const observer = state => {
@@ -90,6 +104,8 @@ store.observe(observer);
 ```
 
 #### `store.unobserve(o: (state: T) => void): void`
+
+Unregister an observer.
 
 ```javascript
 const observer = state => {
